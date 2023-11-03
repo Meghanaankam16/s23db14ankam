@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+
+  - var donuts = [{ donut_name: "jelly filled", donut_price: 50, donut_store: "Dunkins" },{ donut_name: "chocolate frosted", donut_price: 60, donut_store: "Krispy Kreme" },{ donut_name: "cinnamon sugar", donut_price: 40, donut_store: "Voodoo" }]
+
+  div(class="container-fluid")
+    div(class="row")
+      each piece, index in donuts
+        div(class="col-sm-2", onclick=`buy(${index})`) #{piece.donut_name}, #{piece.donut_price}, #{piece.donut_store}
+        script. 
+          function buy(index)
+          {
+            alert(`you purchased item: ${index+1}`)
+          }
