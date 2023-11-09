@@ -19,3 +19,15 @@ exports.donut_delete = function(req, res) {
 exports.donut_update_put = function(req, res) {
  res.send('NOT IMPLEMENTED: donut update PUT' + req.params.id);
 };
+
+// List of all donuts
+exports.donut_list = async function(req, res) {
+    try{
+    thedonuts = await donut.find();
+    res.send(thedonuts);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+   };
