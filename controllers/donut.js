@@ -31,3 +31,16 @@ exports.donut_list = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
    };
+
+   // VIEWS
+// Handle a show all view
+exports.donut_view_all_Page = async function(req, res) {
+    try{
+    thedonut = await donut.find();
+    res.render('donut', { title: 'donut Search Results', results: thedonut });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+   };
