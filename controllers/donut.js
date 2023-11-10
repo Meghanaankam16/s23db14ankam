@@ -65,3 +65,36 @@ exports.donut_create_post = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
    };
+
+   exports.donut_detail = async function (req, res) {
+    console.log("detail" + req.params.id)
+    try {
+        result = await donut.findById(req.params.id)
+        res.send(result)
+    } catch (error) {
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+};
+
+//New code for Assignment 12 for screenshot2
+//Handle donut update form on PUT
+exports.donut_update_put = async function (req, res) {
+    console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+    try {
+        let toUpdate = await donut.findById(req.params.id)
+        // Do updates of properties
+        if (req.body.donut_name)
+            toUpdate.donut_name = req.body.donut_name;
+        if (req.body.donut_price) toUpdate.donut_price= req.body.donut_price;
+        if (req.body.donut_store) toUpdate.donut_store= req.body.donut_store;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+    }
+};
