@@ -1,43 +1,45 @@
 extends layout
 
 block content
-    h1= title
-    - let donutid = toShow._id
-    - let donut_name = toShow.donut_name
-    - let donut_price = toShow.donut_price
-    - let donut_store = toShow.donut_store
+    if (toShow == null)
+        h2 No instance to update
+    else
+        - let donutid = toShow._id
+        - let donut_name = toShow.donut_name
+        - let donut_price = toShow.donut_price
+        - let donut_store = toShow.donut_store
 
-    div.row(class='mb-2')
-        div.mr-1 ID is
-        div #{donutid}
+        div.row(class='mb-2')
+            div.mr-1 ID is
+            div #{donutid}
 
-    - let actionid = "/resource/donut/" + donutid
-    form(id='donutForm', action= actionid, method="PUT")
-        div.form-group
-            label.donutAttr(for='donut_name') Donut Name 
-            input#donut_name(type='text', name='donut_name', value= donut_name )
-        div.form-group
-            label.donutAttr(for='donut_price') Donut Price
-            input#donut_price(type='number', name='donut_price', value= donut_price )
-        div.form-group
-            label.donutAttr(for='donut_store') Donut Store
-            input#donut_store(type='text', name='donut_store', value= donut_store )
-        input(type="submit")
+        - let actionid = "/resource/donut/" + donutid
+        form(id='donutForm', action= actionid, method="PUT")
+            div.form-group
+                label.donutAttr(for='donut_name') Donut Name 
+                input#donut_name(type='text', name='donut_name', value= donut_name )
+            div.form-group
+                label.donutAttr(for='donut_price') Donut Price
+                input#donut_price(type='number', name='donut_price', value= donut_price )
+            div.form-group
+                label.donutAttr(for='donut_store') Donut Store
+                input#donut_store(type='text', name='donut_store', value= donut_store )
+            input(type="submit")
 
-    script.
-        document.forms['donutForm'].addEventListener('submit', (event) => {
-            event.preventDefault();
-            // TODO do something here to show the user that the form is being submitted
-            fetch(event.target.action, {
-                method: 'PUT',
-                body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-            }).then((resp) => {
-                return resp.json(); // or resp.text() or whatever the server sends
-            }).then((body) => {
-                alert("Update succeeded");
-                // TODO handle the response body
-            }).catch((error) => {
-                // TODO handle the error
-                alert("Update failed " + error);
+        script.
+            document.forms['donutForm'].addEventListener('submit', (event) => {
+                event.preventDefault();
+                // TODO do something here to show the user that the form is being submitted
+                fetch(event.target.action, {
+                    method: 'PUT',
+                    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+                }).then((resp) => {
+                    return resp.json(); // or resp.text() or whatever the server sends
+                }).then((body) => {
+                    alert("Update succeeded");
+                    // TODO handle the response body
+                }).catch((error) => {
+                    // TODO handle the error
+                    alert("Update failed " + error);
+                });
             });
-        });
