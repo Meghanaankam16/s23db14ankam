@@ -1,0 +1,58 @@
+extends layout
+
+block content
+  h1= title
+
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let donutid = toShow._id
+    - let donut_name = toShow.donut_name
+    - let donut_price = toShow.donut_price
+    - let donut_store = toShow.donut_store
+    - let actionid = "/resource/donut/" + donutid
+    
+
+    script.
+      let actionid = "#{actionid}"
+
+    div
+      div.row
+        div(class='donutAttr mr-3') Donut ID is:
+        div #{donutid}
+      div.row
+        div(class='donutAttr mr-3') Donut Name is:
+        div #{donut_name}
+      div.row
+        div(class='donutAttr mr-3') Donut Price is:
+        div #{donut_price}
+      div.row
+        div(class='donutAttr mr-3') Donut Store is:
+        div #{donut_store}
+
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+    script.
+      function cancel() {
+        // Go back to the home page for the costume collection
+        window.location.href='/donut'
+      }
+
+    script.
+      function deleteOnid() {
+        console.log("starting delete")
+        // delete first
+        fetch(actionid, {
+          method: 'DELETE' // Don't need a body for the delete
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Delete succeeded")
+          window.location.href='/donut'
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Delete failed " + error)
+        });
+      }

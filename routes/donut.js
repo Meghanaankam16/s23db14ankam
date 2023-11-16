@@ -6,5 +6,7 @@ router.get('/', donut_controlers.donut_view_all_Page );
 router.get('/detail', donut_controlers.donut_view_one_Page);
 router.get('/create', donut_controlers.donut_create_Page);
 router.get('/update', donut_controlers.donut_update_Page);
+router.get('/delete', donut_controlers.donut_delete_Page);
+
 
 module.exports = router;

@@ -158,4 +158,19 @@ exports.donut_delete = async function(req, res) {
     res.send(`{'error': '${err}'}`);
     }
     };
+
+    //ss9
+    // Handle a delete one view with id from query
+    exports.donut_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await donut.findById(req.query.id)
+    res.render('donutdelete', { title: 'Donut Delete', toShow:
+    result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
     
