@@ -51,19 +51,19 @@ var resourceRouter = require('./routes/resource');
 async function recreateDB(){
  // Delete everything
  await donut.deleteMany();
- let instance1 = new donut({donut_name:"jelly filed", donut_price:50, donut_store:'dunkins'});
+ let instance1 = new donut({donut_name:"jelly filed", donut_price:50, donut_store:'dunkins', donut_orderId: 56});
  instance1.save().then(doc=>{
  console.log("First object saved")}
  ).catch(err=>{
  console.error(err)
  });
- let instance2 = new donut({donut_name:"choclate frosted", donut_price:45, donut_store:'Krispy'});
+ let instance2 = new donut({donut_name:"choclate frosted", donut_price:45, donut_store:'Krispy', donut_orderId: 43});
  instance2.save().then(doc=>{
  console.log("Second object saved")}
  ).catch(err=>{
  console.error(err)
  });
- let instance3 = new donut({donut_name:"cinnaman sugar", donut_price:60, donut_store:'Voodoo'});
+ let instance3 = new donut({donut_name:"cinnaman sugar", donut_price:60, donut_store:'Voodoo', donut_orderId: 67});
  instance3.save().then(doc=>{
  console.log("Third object saved")}
  ).catch(err=>{

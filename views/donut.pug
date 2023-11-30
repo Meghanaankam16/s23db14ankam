@@ -3,13 +3,16 @@ extends layout
 block content
   h1= title
   - let items = results;
+  a(class="btn btn-info" href="/donut/create") Create
   div(class="container-fluid")
     div(class="row m-1")
       each item in items
         - let destination = `dispatch(\"/donut/update?id=${item._id}\")`
         div(class="row-sm-2", class="m-1") 
-          | Donut #{item.donut_name}(#{item.donut_price}) is #{item.donut_store}
+          | Donut #{item.donut_name}(#{item.donut_price}) is #{item.donut_store} with orderId #{item.donut_orderId}
           button.btn( class="btn-primary ml-1", onclick= destination) Update
+          a(class="btn btn-danger" href="/donut/create") Delete
+          a(class="btn btn-success" href="/donut/create") Details
   script.
     function dispatch(path){
       window.location.href=path;
